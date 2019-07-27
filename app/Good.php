@@ -16,7 +16,8 @@ class Good extends Model
 		'price' => 'required'
 	);
 
-	public static getData() {
+	public function getData() 
+	{
 		return $this->id . ':' . $this->title
 			. '(' . $this->desc . ')';
 	}
