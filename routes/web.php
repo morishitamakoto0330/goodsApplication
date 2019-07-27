@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::resource('goods', 'GoodsController');
+Route::get('hello/goods', 'HelloController@goods');

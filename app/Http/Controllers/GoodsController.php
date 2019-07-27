@@ -25,7 +25,7 @@ class GoodsController extends Controller
      */
     public function create()
     {
-        //
+	    return view('goods.create');
     }
 
     /**
@@ -36,7 +36,11 @@ class GoodsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+	    $goods = new Good;
+	    $form = $request->all();
+	    unset($form['_token']);
+	    $goods->fill($form)->save();
+	    return redirect('/goods');
     }
 
     /**
