@@ -96,6 +96,9 @@ class GoodsController extends Controller
      */
     public function destroy($id)
     {
-        //
+	    $good = Good::find($id);
+	    $good->delete();
+
+	    return redirect('/goods');
     }
 }

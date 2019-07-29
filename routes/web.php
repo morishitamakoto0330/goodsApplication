@@ -18,5 +18,6 @@ Route::get('/', function () {
 Route::resource('goods', 'GoodsController');
 
 Route::get('hello/create', 'HelloController@create');
+Route::get('hello/{id}/delete', 'HelloController@delete');
 
 

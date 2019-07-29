@@ -10,4 +10,9 @@ class HelloController extends Controller
 	{
 		return view('hello.create');
 	}
+
+	public function delete($id)
+	{
+		return view('hello.delete', ['id' => $id]);
+	}
 }
