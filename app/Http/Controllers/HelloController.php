@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 class HelloController extends Controller
 {
-	public function goods(Request $request)
+	public function create(Request $request)
 	{
-		return view('hello.goods');
+		return view('hello.create');
 	}
 }

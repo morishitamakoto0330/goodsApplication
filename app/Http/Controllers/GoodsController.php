@@ -15,6 +15,7 @@ class GoodsController extends Controller
     public function index()
     {
 	    $items = Good::all();
+
 	    return $items->toArray();
     }
 
@@ -40,6 +41,7 @@ class GoodsController extends Controller
 	    $form = $request->all();
 	    unset($form['_token']);
 	    $goods->fill($form)->save();
+
 	    return redirect('/goods');
     }
 
@@ -52,6 +54,7 @@ class GoodsController extends Controller
     public function show($id)
     {
 	    $item = Good::find($id);
+
 	    return $item->toArray();
     }
 
@@ -63,7 +66,9 @@ class GoodsController extends Controller
      */
     public function edit($id)
     {
-        //
+	    $item = Good::find($id);
+
+	    return view('goods.edit', ['good' => $item]);
     }
 
     /**
@@ -75,7 +80,12 @@ class GoodsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+	    $good = Good::find($id);
+	    $form = $request->all();
+	    unset($form['_token']);
+	    $good->fill($form)->save();
+
+	    return redirect('/goods');
     }
 
     /**

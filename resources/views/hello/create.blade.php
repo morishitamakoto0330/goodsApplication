@@ -1,6 +1,6 @@
 <html>
 <head>
-	<title> hello/goods </title>
+	<title> hello/create </title>
 </head>
 <body>
 	<h1> Goods </h1>
