@@ -12,10 +12,10 @@ class GoodsTableSeeder extends Seeder
      */
     public function run()
     {
-	    $binary_string = b'image';
+	    $path = '/sample.jpg';
 
 	    $param = [
-		    'image' => $binary_string,
+		    'imagePath' => $path,
 		    'title' => 'goods1',
 		    'desc' => 'sample goods 1',
 		    'price' => 100,
@@ -24,7 +24,7 @@ class GoodsTableSeeder extends Seeder
 	    $goods->fill($param)->save();
 
 	    $param = [
-		    'image' => $binary_string,
+		    'imagePath' => $path,
 		    'title' => 'goods2',
 		    'desc' => 'sample goods 2',
 		    'price' => 200,

@@ -8,19 +8,19 @@ use App\Good;
 class GoodsController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * 商品のリストを表示する
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-	    $items = Good::all();
+	    $goods = Good::all();
 
-	    return $items->toArray();
+	    return view('goods.index', ['goods' => $goods]);
     }
 
     /**
-     * Show the form for creating a new resource.
+     * 商品の新規作成フォームを表示する
      *
      * @return \Illuminate\Http\Response
      */
@@ -30,49 +30,71 @@ class GoodsController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * 商品をデータベースに保存する
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-	    $goods = new Good;
-	    $form = $request->all();
-	    unset($form['_token']);
-	    $goods->fill($form)->save();
+	    $good = new Good;
+	    //$form = $request->all();
+	    //unset($form['_token']);
+
+	    // 画像ファイルのバリデーションチェック
+	    /*
+	    $this->validate($request, [
+		    'file' => [
+			    'required',
+			    'file',
+			    'image',
+			    'mimes:jpeg,png',
+		    ]
+	    ]);
+	     */
+	    $path = "no image";
+	    if($request->image->isValid([])) {
+		    $path = $request->image->store('public');
+		    $path = str_replace("public/", "", $path);
+	    }
+	    $good->imagePath = $path;
+	    $good->title = $request->title;
+	    $good->desc = $request->desc;
+	    $good->price = $request->price;
+	    $good->save();
+	    //$good->fill($form)->save();
 
 	    return redirect('/goods');
     }
 
     /**
-     * Display the specified resource.
+     * 特定の商品を表示する
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
     {
-	    $item = Good::find($id);
+	    $good = Good::find($id);
 
-	    return $item->toArray();
+	    return $good->toArray();
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * 特定の商品の編集フォームを表示する
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
-	    $item = Good::find($id);
+	    $good = Good::find($id);
 
-	    return view('goods.edit', ['good' => $item]);
+	    return view('goods.edit', ['good' => $good]);
     }
 
     /**
-     * Update the specified resource in storage.
+     * 特定の商品データを更新する
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -89,7 +111,7 @@ class GoodsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * データベースから特定の商品を削除する
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -102,3 +124,5 @@ class GoodsController extends Controller
 	    return redirect('/goods');
     }
 }
+
+

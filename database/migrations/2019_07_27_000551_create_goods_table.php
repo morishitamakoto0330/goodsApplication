@@ -15,7 +15,7 @@ class CreateGoodsTable extends Migration
     {
         Schema::create('goods', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->binary('image');
+            $table->string('imagePath');
             $table->string('title', 100);
             $table->string('desc', 500);
 	    $table->bigInteger('price');

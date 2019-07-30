@@ -11,13 +11,17 @@
 |
 */
 
+/*
 Route::get('/', function () {
 	return view('welcome');
 });
+ */
+
+Route::get('/', 'GoodsController@index');
+Route::get('hello/create', 'HelloController@create');
+Route::get('hello/{id}/delete', 'HelloController@delete');
 
 Route::resource('goods', 'GoodsController');
 
-Route::get('hello/create', 'HelloController@create');
-Route::get('hello/{id}/delete', 'HelloController@delete');
 
 
