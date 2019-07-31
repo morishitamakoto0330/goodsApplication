@@ -1,24 +1,23 @@
+<link rel="stylesheet" href="{{ asset('css/style.css') }}">
+
+<h1> 商品一覧 </h1>
+
 <table>
+	<tr>
+		<th> id </th>
+		<th> 商品画像 </th>
+		<th> 商品名 </th>
+		<th> 説明 </th>
+		<th> 価格 </th>
+	</tr>
 @foreach ( $goods as $good )
 	{{ csrf_field() }}
 	<tr> 
-		<th>image:</th> 
-		<td><img src="/storage/{{ $good->imagePath }}"></td>
-	</tr>
-
-	<tr> 
-		<th>title:</th> 
+		<td> {{ $good->id }} </td>
+		<td><img src="/storage/{{ $good->imagePath }}" width="100" height="100"></td>
 		<td> {{ $good->title }} </td>
-	</tr>
-
-	<tr> 
-		<th>desc: </th> 
 		<td> {{ $good->desc  }} </td>
-	</tr>
-
-	<tr> 
-		<th>price:</th> 
-		<td> {{ $good->price }} </td>
+		<td> {{ $good->price }}円 </td>
 	</tr>
 @endforeach
 </table>
