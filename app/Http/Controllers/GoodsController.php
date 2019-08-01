@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Good;
+use App\Http\Requests\GoodRequest;
 
 class GoodsController extends Controller
 {
@@ -35,34 +36,17 @@ class GoodsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(GoodRequest $request)
     {
-	    $good = new Good;
-	    //$form = $request->all();
-	    //unset($form['_token']);
+	    $path = $request->image->store('public');
+	    $path = str_replace("public/", "", $path);
 
-	    // 画像ファイルのバリデーションチェック
-	    /*
-	    $this->validate($request, [
-		    'file' => [
-			    'required',
-			    'file',
-			    'image',
-			    'mimes:jpeg,png',
-		    ]
-	    ]);
-	     */
-	    $path = "no image";
-	    if($request->image->isValid([])) {
-		    $path = $request->image->store('public');
-		    $path = str_replace("public/", "", $path);
-	    }
+	    $good = new Good;
 	    $good->imagePath = $path;
 	    $good->title = $request->title;
 	    $good->desc = $request->desc;
 	    $good->price = $request->price;
 	    $good->save();
-	    //$good->fill($form)->save();
 
 	    return redirect('/goods');
     }
@@ -100,12 +84,17 @@ class GoodsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(GoodRequest $request, $id)
     {
+	    $path = $request->image->store('public');
+	    $path = str_replace("public/", "", $path);
+
 	    $good = Good::find($id);
-	    $form = $request->all();
-	    unset($form['_token']);
-	    $good->fill($form)->save();
+	    $good->imagePath = $path;
+	    $good->title = $request->title;
+	    $good->desc = $request->desc;
+	    $good->price = $request->price;
+	    $good->save();
 
 	    return redirect('/goods');
     }
