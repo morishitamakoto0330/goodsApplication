@@ -32,6 +32,7 @@ class GoodsController extends Controller
 
     /**
      * 商品をデータベースに保存する
+     * 画像ファイルは"../storage/app/public" 配下に保存する
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -79,6 +80,7 @@ class GoodsController extends Controller
 
     /**
      * 特定の商品データを更新する
+     * 画像ファイルは"../storage/app/public" 配下に保存する
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -101,6 +103,7 @@ class GoodsController extends Controller
 
     /**
      * データベースから特定の商品を削除する
+     * "../storage/app/public" 配下の画像ファイルも削除する
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -108,6 +111,7 @@ class GoodsController extends Controller
     public function destroy($id)
     {
 	    $good = Good::find($id);
+	    unlink("../storage/app/public/" . $good->imagePath);
 	    $good->delete();
 
 	    return redirect('/goods');
