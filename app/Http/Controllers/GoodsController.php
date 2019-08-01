@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Good;
+use App\Shop;
 use App\Http\Requests\GoodRequest;
 
 class GoodsController extends Controller
@@ -17,7 +18,13 @@ class GoodsController extends Controller
     {
 	    $goods = Good::all();
 
-	    return view('goods.index', ['goods' => $goods]);
+	    $shopNames = array();
+	    foreach($goods as $good) {
+		    $shop = Shop::find($good->shopId);
+		    array_push($shopNames, $shop->name);
+	    }
+
+	    return view('goods.index', ['goods' => $goods, 'shopNames' => $shopNames]);
     }
 
     /**
@@ -47,6 +54,7 @@ class GoodsController extends Controller
 	    $good->title = $request->title;
 	    $good->desc = $request->desc;
 	    $good->price = $request->price;
+	    $good->shopId = $request->shopId;
 	    $good->save();
 
 	    return redirect('/goods');
@@ -96,6 +104,7 @@ class GoodsController extends Controller
 	    $good->title = $request->title;
 	    $good->desc = $request->desc;
 	    $good->price = $request->price;
+	    $good->shopId = $request->shopId;
 	    $good->save();
 
 	    return redirect('/goods');

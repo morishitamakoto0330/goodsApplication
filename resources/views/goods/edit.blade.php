@@ -30,7 +30,7 @@
 		<tr> 
 			<th>商品画像：</th> 
 			<td>
-				<img src="/storage/{{ $good->imagePath }}" width="100" height="100">
+				<img class="good-image" src="/storage/{{ $good->imagePath }}">
 				<input type="file" name="image" value="">
 			</td>
 		</tr>

@@ -13,9 +13,10 @@
 			<th> 商品名 </th>
 			<th> 説明 </th>
 			<th> 価格 </th>
+			<th> 店舗 </th>
 			<th> </th>
 		</tr>
-	@foreach ( $goods as $good )
+	@foreach ( $goods as $index => $good )
 		{{ csrf_field() }}
 		<tr> 
 			<td><img class="good-image" src="/storage/{{ $good->imagePath }}" ></td>
@@ -42,10 +43,12 @@
 				for($i = 1; $i <= $num; $i++) {
 					$price = substr_replace($price, ",", (strlen($price) - ($i*$commaWidth + $i - 1)), 0);
 				}
+
 			@endphp
 			<td> {!! nl2br(e($title)) !!} </td>
 			<td> {!! nl2br(e($desc))  !!} </td>
 			<td> {{ $price }}円 </td>
+			<td> {{ $shopNames[$index] }} </td>
 			<td> 
 				<form action="/goods/{{ $good->id }}/edit" method="get">
 					<button> 商品編集 </button>
