@@ -18,9 +18,23 @@
 	@foreach ( $goods as $good )
 		{{ csrf_field() }}
 		<tr> 
-			<td><img src="/storage/{{ $good->imagePath }}" width="100" height="100"></td>
-			<td> {{ $good->title }} </td>
-			<td> {{ $good->desc  }} </td>
+			<td><img class="good-image" src="/storage/{{ $good->imagePath }}" ></td>
+			@php
+				$title = $good->title;
+				$lineWidth = 20;
+				$num = strlen($title)/$lineWidth;
+				for($i = 1; $i <= $num; $i++) {
+					$title = substr_replace($title, "\n", ($i*$lineWidth + $i - 1), 0);
+				}
+				$desc = $good->desc;
+				$lineWidth = 50;
+				$num = strlen($desc)/$lineWidth;
+				for($i = 1; $i <= $num; $i++) {
+					$desc = substr_replace($desc, "\n", ($i*$lineWidth + $i - 1), 0);
+				}
+			@endphp
+			<td> {!! nl2br(e($title)) !!} </td>
+			<td> {!! nl2br(e($desc))  !!} </td>
 			<td> {{ $good->price }}円 </td>
 			<td> 
 				<form action="/goods/{{ $good->id }}/edit" method="get">

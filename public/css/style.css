@@ -3,24 +3,32 @@
 table {
 	border-collapse: collapse;
 }
-td {
+
+table td {
 	border: solid 1px;
 	padding: 0.5em;
 }
-th {
+
+table th {
 	border: solid 1px;
 	padding: 0.5em;
 	background:#dcdcdc;
 }
 
-p.error {
+.error {
 	color: #ff0000;
 }
 
-p.error-message {
+.error-message {
 	text-align: center;
 	color: #ff0000;
 }
+
+.good-image {
+	text-align: center;
+	width: 100px;
+}
+
 
 .footer {
 	text-align: right;
