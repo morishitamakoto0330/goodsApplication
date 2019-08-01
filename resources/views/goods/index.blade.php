@@ -3,6 +3,12 @@
 @section('title', '商品一覧')
 
 @section('content')
+	<form action="/goods/show" method="get">
+		<input type="search" name="text" size="20">
+		<input type="submit" value="検索" >
+	</form>
+
+
 	<form action="/goods/create" method="get">
 		<button> 新規商品登録 </button>
 	</form>
@@ -47,7 +53,7 @@
 			@endphp
 			<td> {!! nl2br(e($title)) !!} </td>
 			<td> {!! nl2br(e($desc))  !!} </td>
-			<td> {{ $price }}円 </td>
+			<td align="right"> {{ $price }}円 </td>
 			<td> {{ $shopNames[$index] }} </td>
 			<td> 
 				<form action="/goods/{{ $good->id }}/edit" method="get">

@@ -92,6 +92,7 @@ class GoodsController extends Controller
     /**
      * 特定の商品データを更新する
      * 画像ファイルは"../storage/app/public" 配下に保存する
+     * 以前の画像ファイルは削除する
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -103,6 +104,7 @@ class GoodsController extends Controller
 	    $path = str_replace("public/", "", $path);
 
 	    $good = Good::find($id);
+	    unlink("../storage/app/public/" . $good->imagePath);
 	    $good->imagePath = $path;
 	    $good->title = $request->title;
 	    $good->desc = $request->desc;
