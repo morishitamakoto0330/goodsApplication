@@ -34,7 +34,9 @@ class GoodsController extends Controller
      */
     public function create()
     {
-	    return view('goods.create');
+	    $shops = Shop::all();
+
+	    return view('goods.create', ['shops' => $shops]);
     }
 
     /**
@@ -82,8 +84,9 @@ class GoodsController extends Controller
     public function edit($id)
     {
 	    $good = Good::find($id);
+	    $shops = Shop::all();
 
-	    return view('goods.edit', ['good' => $good]);
+	    return view('goods.edit', ['good' => $good, 'shops' => $shops]);
     }
 
     /**

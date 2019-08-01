@@ -86,6 +86,21 @@
 		@endif
 		<tr> <th>　　　　価格：</th> <td><input type="number" name="price" value="{{ $good->price }}"></td></tr>
 
+		<tr> <th>　　　店舗名：</th> 
+			<td>
+				<select name="shopId">
+					@foreach ($shops as $shop)
+						@if ($good->shopId == $shop->id)
+							<option value="{{ $shop->id }}" selected>{{ $shop->name }}</option>
+						@else
+							<option value="{{ $shop->id }}">{{ $shop->name }}</option>
+						@endif
+					@endforeach
+				</select>
+			</td>
+		</tr>
+
+
 		<tr> <th></th> <td><input type="submit" value="更新"></td> </tr>
 	</form>
 	</table>

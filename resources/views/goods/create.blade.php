@@ -78,6 +78,16 @@
 		@endif
 		<tr> <th>　　　　価格：</th> <td><input type="number" name="price" value="{{ old('price') }}"></td></tr>
 
+		<tr> <th>　　　店舗名：</th> 
+			<td>
+				<select name="shopId">
+					@foreach ($shops as $shop)
+						<option value="{{ $shop->id }}">{{ $shop->name }}</option>
+					@endforeach
+				</select>
+			</td>
+		</tr>
+
 		<tr> <th></th> <td><input type="submit" value="登録"></td> </tr>
 	</form>
 	</table>
