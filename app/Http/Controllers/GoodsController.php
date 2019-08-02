@@ -17,6 +17,7 @@ class GoodsController extends Controller
     public function index()
     {
 	    $goods = Good::all();
+	    $shops = Shop::all();
 
 	    $shopNames = array();
 	    foreach($goods as $good) {
@@ -24,7 +25,7 @@ class GoodsController extends Controller
 		    array_push($shopNames, $shop->name);
 	    }
 
-	    return view('goods.index', ['goods' => $goods, 'shopNames' => $shopNames]);
+	    return view('goods.index', ['goods' => $goods, 'shopNames' => $shopNames, 'shops' => $shops]);
     }
 
     /**
@@ -64,21 +65,35 @@ class GoodsController extends Controller
 
     /**
      * 特定の商品を表示する
+     * 商品は検索テキストと店舗IDで絞り込む
+     * 検索テキストは商品タイトルのみ走査する
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
     {
-	    $goods = Good::all();
-
+	    $goodsAll = Good::all();
+	    $goods = array();
 	    $shopNames = array();
-	    foreach($goods as $good) {
-		    $shop = Shop::find($good->shopId);
-		    array_push($shopNames, $shop->name);
+
+	    $text = $request->text;
+	    $shopId = $request->shopId;
+
+	    foreach($goodsAll as $good) {
+		    if(strpos($good->title, $text) !== false) {
+		    	$goods[] = $good;
+		    }
 	    }
 
-	    return view('goods.show', ['goods' => $goods, 'shopNames' => $shopNames, 'text' => $request->text]);
+	    foreach($goods as $good) {
+		    if($good->shopId == $shopId || $shopId == 0) {
+			    $shop = Shop::find($good->shopId);
+			    array_push($shopNames, $shop->name);
+		    }
+	    }
+
+	    return view('goods.show', ['goods' => $goods, 'shopNames' => $shopNames]);
     }
 
     /**

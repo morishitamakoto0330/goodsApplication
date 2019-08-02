@@ -4,6 +4,12 @@
 
 @section('content')
 	<form action="/goods/show" method="get">
+		<select name="shopId">
+			<option value="0">全ての店舗</option>
+			@foreach ($shops as $shop)
+				<option value="{{ $shop->id }}">{{ $shop->name }}</option>
+			@endforeach
+		</select>
 		<input type="search" name="text" size="20">
 		<input type="submit" value="検索" >
 	</form>

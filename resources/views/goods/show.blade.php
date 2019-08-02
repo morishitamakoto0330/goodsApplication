@@ -3,7 +3,6 @@
 @section('title', '検索結果')
 
 @section('content')
-	{{ $text }}
 	<table>
 		<tr>
 			<th> 商品画像 </th>
