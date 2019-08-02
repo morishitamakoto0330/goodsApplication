@@ -17,10 +17,9 @@ Route::get('/', function () {
 });
  */
 
+// ルートへのアクセスはインデックスアクションを割り当てる
 Route::get('/', 'GoodsController@index');
-Route::get('hello/create', 'HelloController@create');
-Route::get('hello/{id}/delete', 'HelloController@delete');
-
+// リソースコントローラーに用意されている7つのアクションへのルーティングを設定する
 Route::resource('goods', 'GoodsController');
 
 

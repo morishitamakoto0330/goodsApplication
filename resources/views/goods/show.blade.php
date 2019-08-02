@@ -1,18 +1,9 @@
 @extends('layouts/goodsapp')
 
-@section('title', '商品一覧')
+@section('title', '検索結果')
 
 @section('content')
-	<form action="/goods/show" method="get">
-		<input type="search" name="text" size="20">
-		<input type="submit" value="検索" >
-	</form>
-
-
-	<form action="/goods/create" method="get">
-		<button> 新規商品登録 </button>
-	</form>
-
+	{{ $text }}
 	<table>
 		<tr>
 			<th> 商品画像 </th>
@@ -20,7 +11,6 @@
 			<th> 説明 </th>
 			<th> 価格 </th>
 			<th> 店舗 </th>
-			<th> </th>
 		</tr>
 	@foreach ( $goods as $index => $good )
 		{{ csrf_field() }}
@@ -55,12 +45,6 @@
 			<td> {!! nl2br(e($desc))  !!} </td>
 			<td align="right"> {{ $price }}円 </td>
 			<td> {{ $shopNames[$index] }} </td>
-			<td> 
-				<form action="/goods/{{ $good->id }}/edit" method="get">
-					<button> 商品編集 </button>
-				</form>
-				@include('goods.delete') 
-			</td>
 		</tr>
 	@endforeach
 	</table>

@@ -65,14 +65,20 @@ class GoodsController extends Controller
     /**
      * 特定の商品を表示する
      *
-     * @param  int  $id
+     * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Request $request)
     {
-	    $good = Good::find($id);
+	    $goods = Good::all();
 
-	    return $good->toArray();
+	    $shopNames = array();
+	    foreach($goods as $good) {
+		    $shop = Shop::find($good->shopId);
+		    array_push($shopNames, $shop->name);
+	    }
+
+	    return view('goods.show', ['goods' => $goods, 'shopNames' => $shopNames, 'text' => $request->text]);
     }
 
     /**
