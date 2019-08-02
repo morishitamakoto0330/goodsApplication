@@ -57,6 +57,7 @@
 				}
 
 			@endphp
+			<p></p>
 			<td> {!! nl2br(e($title)) !!} </td>
 			<td> {!! nl2br(e($desc))  !!} </td>
 			<td align="right"> {{ $price }}円 </td>

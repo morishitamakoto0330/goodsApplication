@@ -43,6 +43,7 @@ class GoodsController extends Controller
     /**
      * 商品をデータベースに保存する
      * 画像ファイルは"../storage/app/public" 配下に保存する
+     * ajax通信の場合は全商品データのJSONを返す
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -60,6 +61,11 @@ class GoodsController extends Controller
 	    $good->shopId = $request->shopId;
 	    $good->save();
 
+	    if($request->ajax()) {
+		    $goods = Good::all();
+		    return $goods;
+	    }
+
 	    return redirect('/goods');
     }
 
@@ -67,30 +73,27 @@ class GoodsController extends Controller
      * 特定の商品を表示する
      * 商品は検索テキストと店舗IDで絞り込む
      * 検索テキストは商品タイトルのみ走査する
+     * ajax通信の場合は特定の商品データのJSONを返す
      *
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function show(Request $request)
     {
-	    $goodsAll = Good::all();
+	    $goodsAll = ($request->shopId == 0) ? Good::all() : Good::where('shopId', $request->shopId)->get();
 	    $goods = array();
 	    $shopNames = array();
 
-	    $text = $request->text;
-	    $shopId = $request->shopId;
-
 	    foreach($goodsAll as $good) {
-		    if(strpos($good->title, $text) !== false) {
-		    	$goods[] = $good;
-		    }
-	    }
-
-	    foreach($goods as $good) {
-		    if($good->shopId == $shopId || $shopId == 0) {
+		    if(strpos($good->title, $request->text) !== false) {
+			    $goods[] = $good;
 			    $shop = Shop::find($good->shopId);
 			    array_push($shopNames, $shop->name);
 		    }
+	    }
+
+	    if($request->ajax()) {
+		    return $goods;
 	    }
 
 	    return view('goods.show', ['goods' => $goods, 'shopNames' => $shopNames]);
@@ -114,6 +117,7 @@ class GoodsController extends Controller
      * 特定の商品データを更新する
      * 画像ファイルは"../storage/app/public" 配下に保存する
      * 以前の画像ファイルは削除する
+     * ajax通信の場合は全商品データのJSONを返す
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -133,21 +137,33 @@ class GoodsController extends Controller
 	    $good->shopId = $request->shopId;
 	    $good->save();
 
+	    if($request->ajax()) {
+		    $goods = Good::all();
+		    return $goods;
+	    }
+
 	    return redirect('/goods');
     }
 
     /**
      * データベースから特定の商品を削除する
      * "../storage/app/public" 配下の画像ファイルも削除する
+     * ajax通信の場合は全商品データのJSONを返す
      *
+     * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
 	    $good = Good::find($id);
 	    unlink("../storage/app/public/" . $good->imagePath);
 	    $good->delete();
+
+	    if($request->ajax()) {
+		    $goods = Good::all();
+		    return $goods;
+	    }
 
 	    return redirect('/goods');
     }
