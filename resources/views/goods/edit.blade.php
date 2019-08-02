@@ -50,7 +50,7 @@
 				</td>
 			</tr>
 		@endif
-		<tr> <th>商品タイトル：</th> <td><input type="text" name="title" value="{{ $good->title }}"></td></tr>
+		<tr> <th>商品タイトル：</th> <td><textarea rows="5" cols="30" wrap="soft" name="title" value="{{ $good->title }}"></textarea></td></tr>
 
 
 		@if ($errors->has('desc'))
@@ -67,7 +67,7 @@
 				</td>
 			</tr>
 		@endif
-		<tr> <th>　　　　説明：</th> <td><input type="text" name="desc" value="{{ $good->desc }}"></td></tr>
+		<tr> <th>　　　　説明：</th> <td><textarea rows="10" cols="60" wrap="soft" name="desc" value="{{ $good->desc }}"></textarea></td></tr>
 
 
 		@if ($errors->has('price'))
