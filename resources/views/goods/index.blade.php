@@ -3,7 +3,7 @@
 @section('title', '商品一覧')
 
 @section('content')
-	<form action="/goods/show" method="get">
+	<form action="/goods/search" method="post">
 		<input type="search" name="text" size="20">
 		<input type="submit" value="検索" >
 	</form>
@@ -16,7 +16,7 @@
 	<table>
 		<tr>
 			<th> 商品画像 </th>
-			<th> 商品名 </th>
+			<th> 商品タイトル </th>
 			<th> 説明 </th>
 			<th> 価格 </th>
 			<th> 店舗 </th>
