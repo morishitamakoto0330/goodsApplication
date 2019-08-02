@@ -21,5 +21,10 @@ class ShopsTableSeeder extends Seeder
 		    'name' => 'Dospari',
 	    ];
 	    DB::table('shops')->insert($param);
+
+	    $param = [
+		    'name' => 'sofmape',
+	    ];
+	    DB::table('shops')->insert($param);
     }
 }
