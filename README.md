@@ -30,7 +30,7 @@ goodsApplicationは下記情報を持つ商品データの登録・検索・変�
 |登録|/goods/|POST|
 |検索|/goods/{good}|GET|
 |変更|/goods/{good}|PUT/PATCH|
-|削除|/goods/{good}|DELTE|
+|削除|/goods/{good}|DELETE|
 
 ## 作者
 
