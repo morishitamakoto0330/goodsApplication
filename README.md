@@ -14,6 +14,7 @@ goodsApplicationは下記情報を持つ商品データの登録・検索・変�
 
 ## 開発環境
 
+||バージョン情報|
 |:---|:---|
 |OS|Ubuntu 18.04.2 LTS（AWS EC2）|
 |HTTP Server|Nginx 1.14.0|
