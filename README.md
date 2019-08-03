@@ -14,23 +14,22 @@ goodsApplicationは下記情報を持つ商品データの登録・検索・変�
 
 ## 開発環境
 
-|||
 |:---|:---|
 |OS|Ubuntu 18.04.2 LTS（AWS EC2）|
 |HTTP Server|Nginx 1.14.0|
 |Framework|Laravel 5.8.29|
 |Language|PHP 7.2.20|
-|DB|MySQL|
+|DB|MySQL 5.7.27|
 
 
 ## API
 
 |操作|URI|HTTPメソッド|
 |:---|:---|:---|
-|登録|http://"サーバのIPアドレス"/goods/|POST|
-|検索|http://"サーバのIPアドレス"/goods/{good}|GET|
-|変更|http://"サーバのIPアドレス"/goods/{good}|PUT/PATCH|
-|削除|http://"サーバのIPアドレス"/goods/{good}|DELTE|
+|登録|/goods/|POST|
+|検索|/goods/{good}|GET|
+|変更|/goods/{good}|PUT/PATCH|
+|削除|/goods/{good}|DELTE|
 
 ## 作者
 
